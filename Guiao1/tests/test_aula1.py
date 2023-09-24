@@ -90,3 +90,11 @@ def test_menor(mock_menor):
     assert mock_menor([1,2,3,0,5]) == 0
     assert mock_menor.call_count in [5,6]
     assert mock_menor([]) == None
+
+
+#Exercicio 3.5
+@mock.patch('aula1.max_min', side_effect = aula1.max_min)
+def test_mock_max_min(mock_max_min):
+    assert mock_max_min([1,2,3,0,5]) == (0, 5)
+    assert mock_max_min.call_count in [5,6]
+    assert mock_max_min([]) == None

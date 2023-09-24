@@ -86,32 +86,83 @@ def lista_subconjuntos(lista):
 
 #Exercicio 2.1
 def separar(lista):
-	pass
+	if not lista:
+		return ([], [])
+	else:
+		first_element, second_element = lista[0][0], lista[0][1]
+		first_list, second_list = separar(lista[1:])
+		return (concat_listas([[first_element], first_list]), concat_listas([[second_element], second_list]))
 
 #Exercicio 2.2
 def remove_e_conta(lista, elem):
+	if not lista:
+		return ([], 0)
+	else:
+		removed_list, count = remove_e_conta(lista[1:], elem)
+		if lista[0] == elem:
+			return (removed_list, count + 1)
+		else:
+			return (concat([lista[0]], removed_list), count)
 	pass
 
 #Exercicio 3.1
 def cabeca(lista):
-	pass
+	if not lista:
+		return None
+	else:
+		return lista[0]
 
 #Exercicio 3.2
 def cauda(lista):
-	pass
+	if not lista:
+		return None
+	else:
+		return lista[1:]
 
 #Exercicio 3.3
 def juntar(l1, l2):
-    pass
+	if comprimento(l1) != comprimento(l2):
+		return None
+	element1 = cabeca(l1)
+	element2 = cabeca(l2)
+	if element1 == None or element2 == None:
+		return None
+	else:
+		return concat([(element1, element2)], juntar(cauda(l1), cauda(l2)))
+
 
 #Exercicio 3.4
 def menor(lista):
-	pass
+
+	if not lista:
+		return None
+	else:
+		minor = menor(lista[1:])
+		if minor == None:
+			return lista[0]
+		else:
+			print(lista[0], minor, lista[0] < minor)
+			if lista[0] < minor:
+				print("-->",lista[0])
+				return lista[0]
+			else:
+				print("-->",minor)
+				return minor
 
 #Exercicio 3.6
 def max_min(lista):
-	pass
+	if not lista:
+		return None
+	else:
+		max_min_tuple = max_min(lista[1:])
 
-
-
-print(lista_subconjuntos([1,2,3]))
+		if max_min_tuple == None:
+			return (lista[0], lista[0])
+		else:
+			maximum = max_min_tuple[1]
+			minimum = max_min_tuple[0]
+			if lista[0] > maximum:
+				maximum = lista[0]
+			elif lista[0] < minimum:
+				minimum = lista[0]
+			return (minimum, maximum)
