@@ -141,12 +141,9 @@ def menor(lista):
 		if minor == None:
 			return lista[0]
 		else:
-			print(lista[0], minor, lista[0] < minor)
 			if lista[0] < minor:
-				print("-->",lista[0])
 				return lista[0]
 			else:
-				print("-->",minor)
 				return minor
 
 #Exercicio 3.6
