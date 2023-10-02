@@ -58,4 +58,15 @@ def menor_e_resto_ordem(lista, f):
 
 #Exercicio 5.2
 def ordenar_seleccao(lista, ordem):
-    pass
+    if not lista:
+        return []
+    
+    # Quick sort
+
+    pivot = lista[0]
+
+    left = [x for x in lista[1:] if ordem(x, pivot)]
+
+    right = [x for x in lista[1:] if not ordem(x, pivot)]
+
+    return ordenar_seleccao(left, ordem) + [pivot] + ordenar_seleccao(right, ordem)
