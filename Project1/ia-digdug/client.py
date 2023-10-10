@@ -8,8 +8,11 @@ import os
 import pygame
 import websockets
 
+# Initialize the pygame
 pygame.init()
+# Load the program icon to use has the gameboy
 program_icon = pygame.image.load("data/icon2.png")
+# Set the icon to be displayed
 pygame.display.set_icon(program_icon)
 
 
@@ -17,6 +20,7 @@ async def agent_loop(server_address="localhost:8000", agent_name="student"):
     """Example client loop."""
     async with websockets.connect(f"ws://{server_address}/player") as websocket:
         # Receive information about static game properties
+        # Send the first commands
         await websocket.send(json.dumps({"cmd": "join", "name": agent_name}))
 
         # Next 3 lines are not needed for AI agent
@@ -24,6 +28,7 @@ async def agent_loop(server_address="localhost:8000", agent_name="student"):
         SPRITES = pygame.image.load("data/pad.png").convert_alpha()
         SCREEN.blit(SPRITES, (0, 0))
 
+        # Listen to the player game
         while True:
             try:
                 state = json.loads(
@@ -32,6 +37,7 @@ async def agent_loop(server_address="localhost:8000", agent_name="student"):
 
                 # Next lines are only for the Human Agent, the key values are nonetheless the correct ones!
                 key = ""
+                # Receive the keys clicked by the player 
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         pygame.quit()
@@ -57,10 +63,12 @@ async def agent_loop(server_address="localhost:8000", agent_name="student"):
 
                             pprint.pprint(state)
 
+                        # Send the key to the server
                         await websocket.send(
                             json.dumps({"cmd": "key", "key": key})
                         )  # send key command to server - you must implement this send in the AI agent
                         break
+            # If the connection has been closed by the server
             except websockets.exceptions.ConnectionClosedOK:
                 print("Server has cleanly disconnected us")
                 return
