@@ -22,7 +22,6 @@ class ConstraintSearch:
     #   em problemas de atribuicao - algoritmo" )
     def search(self,domains=None):
         self.calls += 1 
-        
         if domains==None:
             domains = self.domains
 
@@ -40,7 +39,7 @@ class ConstraintSearch:
                 if not constraint(var1,domains[var1][0],var2,domains[var2][0]):
                     return None 
             return { v:lv[0] for (v,lv) in domains.items() }
-       
+
         # continuação da pesquisa
         # ( falta fazer a propagacao de restricoes )
         for var in domains.keys():

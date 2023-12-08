@@ -1,0 +1,49 @@
+Variáveis:
+
+	UER - Utilização Exagerada do Rato -------------->[fr]
+	UPAL - Usar o processador de texto PAL ---------->[pt]
+	CENL - Correio Eletrónico Não Lido -------------->[cnl]
+	CP - Cara Preocupada
+	PA - Precisa de Ajuda
+	ST - Sobrecarga de Trabalho --------------------->[sc]
+
+
+Variáveis Independentes:
+
+	UPAL, ST
+
+
+Variáveis Dependentes:
+	
+	UER, CENL, CP, PA
+
+
+Depêndencias entre variáveis:
+
+	UPAL(i)        ST(i)
+	| \            / \
+	|  \          /   \
+	|   PA(d)    /    CENL(d)
+	|  /    |   /
+        | /     |  /
+	UER(d)  CP(d)
+
+
+	P(UPAL) = 0.05
+	P(ST) = 0.6
+
+	P(PA|UPAL) = 0.25
+	P(PA|~UPAL) = 0.004
+
+	P(CENL|ST) = 0.9
+	P(CENL|~ST) = 0.001
+
+	P(UER|UPAL,PA) = 0.9
+	P(UER|UPAL,~PA) = 0.9
+	P(UER|~UPAL,PA) = 0.1
+	P(UER|~UPAL,~PA) = 0.01
+
+	P(CP|PA,ST) = 0.02
+	P(CP|PA,~ST) = 0.011
+	P(CP|~PA,ST) = 0.01
+	P(CP|~PA,~ST) = 0.001
